@@ -14,7 +14,7 @@ from optparse import OptionParser
 EXE_VERSION = '0.0.1'
 # basename is used to strip the ./ if the script is executed from the local dir
 EXE_NAME    = os.path.basename(sys.argv[0])
-LOG_LEVELS  = ('debug', 'info')
+LOG_LEVELS  = ('debug', 'info', 'warn', 'error')
 
 
 ################################### GLOBALS ###################################
@@ -31,12 +31,16 @@ def init_log(log_level):
     if log_level == 'debug':
         logger.setLevel(logging.DEBUG)
         # log_format = '%(asctime)s.%(msecs)d | %(module)s | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
-        # The -5s for levelname makes it so the INFO,DEBUG,ERROR columns line up
-        log_format  = '%(asctime)s.%(msecs)d | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
-    else:
+    elif log_level == 'info':
         logger.setLevel(logging.INFO)
-        log_format  = '%(asctime)s.%(msecs)d | %(levelname)-5s | %(message)s'
+        #log_format  = '%(asctime)s.%(msecs)d | %(levelname)-5s | %(message)s'
+    elif log_level == 'warn':
+        logger.setLevel(logging.WARN)
+    elif log_level == 'error':
+        logger.setLevel(logging.ERROR)
     
+    # -5s for levelname left justifies so INFO,DEBUG,ERROR columns line up
+    log_format  = '%(asctime)s.%(msecs)d | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
     date_format = '%Y-%m-%d %I:%M:%S'
     formatter   = logging.Formatter(log_format, date_format)
     console     = logging.StreamHandler()
