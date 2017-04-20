@@ -25,7 +25,7 @@ def init_log(log_level):
 
     if log_level == 'DEBUG':
         logger.setLevel(logging.DEBUG)
-        # log_format = '%(asctime)s.%(msecs)d | %(module)s | %(funcName)s:%(lineno)d | %(levelname)s | %(message)s'
+        # log_format = '%(asctime)s.%(msecs)d | %(module)s | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
         log_format  = '%(asctime)s.%(msecs)d | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
         date_format = '%Y-%m-%d %I:%M:%S'
         formatter   = logging.Formatter(log_format, date_format)
