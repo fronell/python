@@ -30,7 +30,7 @@ def init_log(log_level):
 
     if log_level == 'debug':
         logger.setLevel(logging.DEBUG)
-        # log_format = '%(asctime)s.%(msecs)d | %(module)s | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
+        #log_format = '%(asctime)s.%(msecs)d | %(module)s | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
     elif log_level == 'info':
         logger.setLevel(logging.INFO)
         #log_format  = '%(asctime)s.%(msecs)d | %(levelname)-5s | %(message)s'
