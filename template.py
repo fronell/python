@@ -6,8 +6,12 @@ This is a template that can be used for writing new scripts
 
 
 ################################### IMPORTS ###################################
-import datetime, logging, os, pprint, sys
+import datetime
+import logging
 from optparse import OptionParser
+import os
+import pprint
+import sys
 
 
 ################################## CONSTANTS ##################################
