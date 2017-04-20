@@ -1,6 +1,7 @@
 #!python
 ################################# DESCRIPTION #################################
 '''
+This is a template that can be used for writing new scripts
 '''
 
 
@@ -19,6 +20,9 @@ EXE_NAME    = os.path.basename(sys.argv[0])
 pp = pprint.PrettyPrinter(indent = 2)
 
 
+################################### CLASSES ###################################
+
+
 ################################## FUNCTIONS ##################################
 def init_log(log_level):
     logger = logging.getLogger('logger')
@@ -26,17 +30,16 @@ def init_log(log_level):
     if log_level == 'DEBUG':
         logger.setLevel(logging.DEBUG)
         # log_format = '%(asctime)s.%(msecs)d | %(module)s | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
+        # The -5s for levelname makes it so the INFO and DEBUG columns line up
         log_format  = '%(asctime)s.%(msecs)d | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
-        date_format = '%Y-%m-%d %I:%M:%S'
-        formatter   = logging.Formatter(log_format, date_format)
     else:
         logger.setLevel(logging.INFO)
         log_format  = '%(asctime)s.%(msecs)d | %(levelname)s | %(message)s'
-        date_format = '%Y-%m-%d %I:%M:%S'
-        formatter   = logging.Formatter(log_format, date_format)
-
-    # Console handler
-    console = logging.StreamHandler()
+    
+    date_format = '%Y-%m-%d %I:%M:%S'
+    formatter   = logging.Formatter(log_format, date_format)
+    console     = logging.StreamHandler()
+    
     console.setFormatter(formatter)
     logger.addHandler(console)
 
@@ -46,11 +49,16 @@ def init_log(log_level):
 ############################### OPTION PARSING ################################
 opts_parser = OptionParser(version="%prog " + EXE_VERSION)
 opts_parser.add_option('-d', '--debug', action='store_true', 
-                       help='Enable debug logging')
+                       help='enable debug logging')
 (opts, args) = opts_parser.parse_args()
 
-#if len(args) != 1:
-#    parser.error("incorrect number of arguments")
+num_args_required = 0
+num_args_passed   = len(args)
+
+if num_args_passed != num_args_required:
+    opts_parser.error("Args passed=%d, Args required=%d" % (num_args_passed, 
+                                                            num_args_required))
+    
 if opts.debug:
     log = init_log('DEBUG')
 else:
