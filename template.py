@@ -69,7 +69,7 @@ opts_parser.add_option("-v",
                        "--verbose", 
                        action="store_true", 
                        default=False,
-                       help="Add funcName:lineno column to logging [default: %default]")
+                       help="Add additional info to each log line [default: %default]")
 (opts, args) = opts_parser.parse_args()
 
 num_args_required = 0
