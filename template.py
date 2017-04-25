@@ -84,8 +84,9 @@ log = init_log(opts.log_level, opts.verbose)
 #################################### MAIN #####################################
 startTime = datetime.datetime.now()
 
-log.info("action=App:Start app_name=%s app_version=%s", EXE_NAME, EXE_VERSION)
-log.debug("app_arguments=%s", sys.argv[1:])
+log.info("action=App:Start app_name=%s app_version=%s app_arguments=%s", 
+         EXE_NAME, EXE_VERSION, sys.argv[1:])
+log.debug("This is a debug")
 log.warn("This is a warning")
 log.error("This is an error")
 
