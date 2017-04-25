@@ -15,9 +15,9 @@ import sys
 
 
 ################################## CONSTANTS ##################################
-EXE_VERSION = "0.0.1"
+APP_VERSION = "0.0.1"
 # basename is used to strip the ./ if the script is executed from the local dir
-EXE_NAME    = os.path.basename(sys.argv[0])
+APP_NAME    = os.path.basename(sys.argv[0])
 LOG_LEVELS  = ("debug", "info", "warn", "error")
 
 
@@ -59,7 +59,7 @@ def init_log(log_level, verbose):
 
 
 ############################### OPTION PARSING ################################
-opts_parser = OptionParser(version="%prog {}".format(EXE_VERSION))
+opts_parser = OptionParser(version="%prog {}".format(APP_VERSION))
 opts_parser.add_option("-l", 
                        "--log_level", 
                        choices=LOG_LEVELS, 
@@ -85,7 +85,7 @@ log = init_log(opts.log_level, opts.verbose)
 startTime = datetime.datetime.now()
 
 log.info("action=App:Start app_name=%s app_version=%s app_arguments=%s", 
-         EXE_NAME, EXE_VERSION, sys.argv[1:])
+         APP_NAME, APP_VERSION, sys.argv[1:])
 log.debug("This is a debug")
 log.warn("This is a warning")
 log.error("This is an error")
