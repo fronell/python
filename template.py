@@ -84,12 +84,10 @@ log = init_log(opts.log_level, opts.verbose)
 #################################### MAIN #####################################
 startTime = datetime.datetime.now()
 
-log.info("[=============== BEGIN ===============]")
-log.info("%s %s starting...", EXE_NAME, EXE_VERSION)
-log.debug("Arguments passed: %s", sys.argv[1:])
+log.info("action=App:Start name=%s version=%s", EXE_NAME, EXE_VERSION)
+log.debug("Arguments=%s", sys.argv[1:])
 log.warn("This is a warning")
 log.error("This is an error")
 
 duration = datetime.datetime.now() - startTime
-log.info("status=Complete duration_seconds=%d", duration.seconds)
-log.info("[================ END ================]")
+log.info("action=App:End status=Completed duration_seconds=%d", duration.seconds)
