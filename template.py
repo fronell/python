@@ -1,8 +1,8 @@
 #!python
 ################################# DESCRIPTION #################################
-'''
+"""
 This is a template that can be used for writing new scripts
-'''
+"""
 
 
 ################################### IMPORTS ###################################
@@ -15,10 +15,10 @@ import sys
 
 
 ################################## CONSTANTS ##################################
-EXE_VERSION = '0.0.1'
+EXE_VERSION = "0.0.1"
 # basename is used to strip the ./ if the script is executed from the local dir
 EXE_NAME    = os.path.basename(sys.argv[0])
-LOG_LEVELS  = ('debug', 'info', 'warn', 'error')
+LOG_LEVELS  = ("debug", "info", "warn", "error")
 
 
 ################################### GLOBALS ###################################
@@ -30,26 +30,25 @@ pp = pprint.PrettyPrinter(indent = 2)
 
 ################################## FUNCTIONS ##################################
 def init_log(log_level, verbose):
-    logger = logging.getLogger('logger')
+    logger = logging.getLogger("logger")
 
-    if log_level == 'debug':
+    if log_level == "debug":
         logger.setLevel(logging.DEBUG)
-        #log_format = '%(asctime)s.%(msecs)d | %(module)s | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
-    elif log_level == 'info':
+    elif log_level == "info":
         logger.setLevel(logging.INFO)
-        #log_format  = '%(asctime)s.%(msecs)d | %(levelname)-5s | %(message)s'
-    elif log_level == 'warn':
+    elif log_level == "warn":
         logger.setLevel(logging.WARN)
-    elif log_level == 'error':
+    elif log_level == "error":
         logger.setLevel(logging.ERROR)
     
     if verbose:
-        log_format  = '%(asctime)s.%(msecs)d | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s'
+        log_format  = "%(asctime)s.%(msecs)d | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s"
+        #log_format = "%(asctime)s.%(msecs)d | %(levelname)s | %(module)s | %(funcName)s:%(lineno)d | %(message)s"
     else:
         # -5s for levelname left justifies so INFO,DEBUG,ERROR columns line up
-        log_format  = '%(asctime)s.%(msecs)d | %(levelname)-5s | %(message)s'
+        log_format  = "%(asctime)s.%(msecs)d | %(levelname)-5s | %(message)s"
         
-    date_format = '%Y-%m-%d %I:%M:%S'
+    date_format = "%Y-%m-%d %I:%M:%S"
     formatter   = logging.Formatter(log_format, date_format)
     console     = logging.StreamHandler()
     
@@ -61,19 +60,23 @@ def init_log(log_level, verbose):
 
 ############################### OPTION PARSING ################################
 opts_parser = OptionParser(version="%prog {}".format(EXE_VERSION))
-opts_parser.add_option('-l', '--log_level', choices=LOG_LEVELS,
-                       default='debug', help='choices are {}'.format(LOG_LEVELS))
-opts_parser.add_option('-v', '--verbose', action='store_true', default=False,
-                       help='Add funcName:lineno column to logging '
-                            "[default: %default]")
+opts_parser.add_option("-l", 
+                       "--log_level", 
+                       choices=LOG_LEVELS, 
+                       default="debug", 
+                       help="choices are {} [default: %default]".format(LOG_LEVELS))
+opts_parser.add_option("-v", 
+                       "--verbose", 
+                       action="store_true", 
+                       default=False,
+                       help="Add funcName:lineno column to logging [default: %default]")
 (opts, args) = opts_parser.parse_args()
 
 num_args_required = 0
 num_args_passed   = len(args)
 
 if num_args_passed != num_args_required:
-    opts_parser.error("Args passed={}, Args required={}".format(num_args_passed, 
-                                                                num_args_required))
+    opts_parser.error("Args passed={}, Args required={}".format(num_args_passed, num_args_required))
     
 log = init_log(opts.log_level, opts.verbose)
 
