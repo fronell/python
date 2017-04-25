@@ -29,7 +29,7 @@ pp = pprint.PrettyPrinter(indent = 2)
 
 
 ################################## FUNCTIONS ##################################
-def init_log(log_level):
+def init_log(log_level, verbose):
     logger = logging.getLogger('logger')
 
     if log_level == 'debug':
@@ -43,8 +43,12 @@ def init_log(log_level):
     elif log_level == 'error':
         logger.setLevel(logging.ERROR)
     
-    # -5s for levelname left justifies so INFO,DEBUG,ERROR columns line up
-    log_format  = '%(asctime)s.%(msecs)d | %(funcName)s:%(lineno)d | %(levelname)-5s | %(message)s'
+    if verbose:
+        log_format  = '%(asctime)s.%(msecs)d | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s'
+    else:
+        # -5s for levelname left justifies so INFO,DEBUG,ERROR columns line up
+        log_format  = '%(asctime)s.%(msecs)d | %(levelname)-5s | %(message)s'
+        
     date_format = '%Y-%m-%d %I:%M:%S'
     formatter   = logging.Formatter(log_format, date_format)
     console     = logging.StreamHandler()
@@ -59,6 +63,9 @@ def init_log(log_level):
 opts_parser = OptionParser(version="%prog {}".format(EXE_VERSION))
 opts_parser.add_option('-l', '--log_level', choices=LOG_LEVELS,
                        default='debug', help='choices are {}'.format(LOG_LEVELS))
+opts_parser.add_option('-v', '--verbose', action='store_true', default=False,
+                       help='Add funcName:lineno column to logging '
+                            "[default: %default]")
 (opts, args) = opts_parser.parse_args()
 
 num_args_required = 0
@@ -68,7 +75,7 @@ if num_args_passed != num_args_required:
     opts_parser.error("Args passed={}, Args required={}".format(num_args_passed, 
                                                                 num_args_required))
     
-log = init_log(opts.log_level)
+log = init_log(opts.log_level, opts.verbose)
 
 
 #################################### MAIN #####################################
