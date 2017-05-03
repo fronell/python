@@ -11,7 +11,7 @@ def write_csv_from_object():
     header = ("year", "make", "model")
     cars = []
     
-    class Vehicle(): 
+    class Vehicle(object): 
         
         def __init__(self, make="NA", model="NA", year="NA"):
             self.make  = make
