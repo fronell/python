@@ -1,0 +1,27 @@
+Console:
+  code module: https://www.digitalocean.com/community/tutorials/how-to-debug-python-with-an-interactive-console
+    -Simple statement that will create a breakpoint into a idle like shell
+    -See debug_with_code_module.py for usage and documentation
+  pdb: https://docs.python.org/2/library/pdb.html
+    -Comes with Python standard library
+    -See debug_with_pdb.py for usage and documentation
+  IPython: https://gist.github.com/Integralist/a2f01ab4aabb786268d5006da5013c9e
+    -Needs to be compiled for Windows which I didn't like
+  PuDB: http://stackoverflow.com/a/6418428
+    -Does not work on Windows without cygwin
+    --Reference: https://github.com/tdryer/hangups/issues/186
+  pydbr: https://github.com/rocky/python2-trepan
+    -Looks like a WIP and not much use yet compared to pdb
+
+GUI:
+  winpdb: http://winpdb.org/
+    -May be the easiest to run for Windows because it only needs wxPython runtime
+  Eric Python IDE: https://eric-ide.python-projects.org/
+    -Full blown IDE that requires PyQT
+  Spyder: https://github.com/spyder-ide/spyder
+    -Requires a specific Python distribution to run on Windows
+  Python Tools for Visual Studio: https://microsoft.github.io/PTVS/
+    -Will work with free version of Visual Studio
+
+Overall, I settled on pdb because it comes standard with Python and it meets my
+current needs.  See debug_with_pdb.py for usage and documentation.
