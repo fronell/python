@@ -51,6 +51,10 @@ def write_csv_from_object():
             # ValueError: dict contains fields not in fieldnames: 'model'
             # csv is picky and requires the dictionary we pass in to have the
             # exact fields we specify in the header
+            # Here is another way to do it but is harder to understand:
+            # Reference: http://stackoverflow.com/questions/7053551/python-valueerror-too-many-values-to-unpack
+            #row = {key: value for key, value in inv[key].__dict__.iteritems()
+            #       if key in columns}
             row = {}
             for column in new_header:
                 row[column] = getattr(car, column)
